@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kauai 🌿</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -354,6 +356,24 @@
     font-weight: 600;
   }
 
+  /* MAP */
+  .map-wrapper {
+    margin: 16px 16px 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .map-wrapper .map-label {
+    background: #1C6B44;
+    color: #f5ede0;
+    padding: 14px 18px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  #kauai-map { height: 320px; width: 100%; }
+
   /* FOOTER */
   .footer {
     text-align: center;
@@ -374,6 +394,12 @@
   <div class="dates" style="font-size:13px; opacity:0.7; margin-top:4px;">Staying in Wainiha</div>
 </div>
 <div class="stripe"></div>
+
+<!-- MAP -->
+<div class="map-wrapper">
+  <div class="map-label">📍 All Spots</div>
+  <div id="kauai-map"></div>
+</div>
 
 <!-- BOOK IN ADVANCE ALERT -->
 <div class="alert">
@@ -905,6 +931,67 @@
     const day = header.parentElement;
     day.classList.toggle('open');
   }
+
+  // Map
+  var map = L.map('kauai-map', { scrollWheelZoom: false }).setView([22.05, -159.45], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  var spots = [
+    // Hikes
+    { lat: 22.0508, lng: -159.6604, name: 'Waimea Canyon Trail', cat: 'hike' },
+    { lat: 22.0871, lng: -159.3515, name: 'Sleeping Giant Trail', cat: 'hike' },
+    { lat: 22.2015, lng: -159.4880, name: 'Okolehao Trail', cat: 'hike' },
+    { lat: 22.0985, lng: -159.3770, name: "Ho'opi'i Falls", cat: 'hike' },
+    // Beaches
+    { lat: 22.2225, lng: -159.5700, name: 'Tunnels Beach', cat: 'beach' },
+    { lat: 22.2085, lng: -159.5010, name: 'Hanalei Bay', cat: 'beach' },
+    { lat: 22.2230, lng: -159.4800, name: 'Hideaways Beach', cat: 'beach' },
+    { lat: 21.8770, lng: -159.4600, name: 'Poipu Beach', cat: 'beach' },
+    { lat: 22.2270, lng: -159.4770, name: "Queen's Bath", cat: 'beach' },
+    // Adventures
+    { lat: 22.2190, lng: -159.5780, name: 'Limahuli Garden', cat: 'activity' },
+    { lat: 22.2050, lng: -159.4960, name: 'Hanalei Farmers Market', cat: 'activity' },
+    // Restaurants — Hanalei area
+    { lat: 22.2037, lng: -159.4930, name: 'Nourish Hanalei', cat: 'food' },
+    { lat: 22.2040, lng: -159.4950, name: 'Hanalei Bread Company', cat: 'food' },
+    { lat: 22.2035, lng: -159.4945, name: 'Fresh Bite Kauai', cat: 'food' },
+    { lat: 22.2042, lng: -159.4925, name: 'Tahiti Nui', cat: 'food' },
+    { lat: 22.2038, lng: -159.4955, name: 'Dolphin Restaurant', cat: 'food' },
+    { lat: 22.2045, lng: -159.4935, name: 'Harvest Market', cat: 'food' },
+    { lat: 22.2030, lng: -159.4940, name: 'Kauai Juice Co', cat: 'food' },
+    // Restaurants — Kapaa area
+    { lat: 22.0925, lng: -159.3430, name: 'Eat Healthy Cafe', cat: 'food' },
+    { lat: 22.0910, lng: -159.3420, name: "Rainbeau Jo's", cat: 'food' },
+    { lat: 22.0920, lng: -159.3440, name: 'Mariachi', cat: 'food' },
+    { lat: 22.0870, lng: -159.3510, name: 'Sleeping Giant Grill', cat: 'food' },
+    // Restaurants — other
+    { lat: 22.0680, lng: -159.6690, name: 'Coconut Corner', cat: 'food' },
+    { lat: 22.2200, lng: -159.4700, name: 'The Terrace', cat: 'food' },
+    { lat: 22.2210, lng: -159.4710, name: '1 Hotel', cat: 'food' },
+    { lat: 21.8720, lng: -159.4610, name: 'The Beach House', cat: 'food' },
+    { lat: 22.2120, lng: -159.4000, name: 'The Bistro (Kilauea)', cat: 'food' },
+    { lat: 22.2033, lng: -159.4920, name: 'Wishing Well Coffee', cat: 'food' },
+    { lat: 22.2048, lng: -159.4960, name: 'Wake Up Delicious', cat: 'food' },
+    { lat: 22.0930, lng: -159.3450, name: 'Java Kai', cat: 'food' },
+    { lat: 22.2015, lng: -159.4935, name: 'Grandma Dining', cat: 'food' },
+  ];
+
+  var colors = { hike: '#8B4513', beach: '#0077BE', activity: '#E67E22', food: '#1C6B44' };
+  var labels = { hike: '🥾', beach: '🏖️', activity: '🤸', food: '🍴' };
+
+  spots.forEach(function(s) {
+    var icon = L.divIcon({
+      className: '',
+      html: '<div style="font-size:18px;text-shadow:0 1px 3px rgba(0,0,0,0.3);">' + labels[s.cat] + '</div>',
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+    L.marker([s.lat, s.lng], { icon: icon })
+      .addTo(map)
+      .bindPopup('<strong>' + s.name + '</strong>');
+  });
 </script>
 </body>
 </html>
