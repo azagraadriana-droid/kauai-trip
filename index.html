@@ -288,6 +288,51 @@
   .links-card a:last-child { border-bottom: none; }
   .links-card a:hover { opacity: 0.7; }
 
+  /* ACTIVITY PICKER */
+  .activity {
+    border-bottom: 1px solid #f5f0ea;
+    cursor: pointer;
+    user-select: none;
+  }
+  .activity:last-child { border-bottom: none; }
+  .activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  .activity-header span { color: #aaa; font-size: 12px; }
+  .activity-header .tap-hint {
+    font-size: 10px;
+    color: #1C6B44;
+    opacity: 0.5;
+  }
+  .activity-eats {
+    display: none;
+    padding: 0 0 12px;
+  }
+  .activity.open .activity-eats { display: block; }
+  .activity.open .activity-header { padding-bottom: 4px; }
+  .eat-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: #fdf8f0;
+    border: 1px solid #e8dfd3;
+    color: #6b5a42;
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin: 3px 4px 3px 0;
+  }
+  .eat-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
   /* FOOTER */
   .footer {
     text-align: center;
@@ -312,7 +357,7 @@
 <!-- BOOK IN ADVANCE ALERT -->
 <div class="alert">
   <strong>⚠️ Book before you fly</strong>
-  🏄 Kapaa surf rental — reserve boards for the day<br>
+  🏄 <a href="https://www.hanaleisurf.com/board-rental-info" style="color:#5a3e00;">Hanalei Surf — reserve boards</a><br>
   🤸 Zip lining — book in advance
 </div>
 
@@ -648,34 +693,178 @@
 
 <!-- ACTIVITY OPTIONS -->
 <div class="restaurants-card">
-  <div class="card-header">🗺️ Activity Options — Pick & Choose</div>
+  <div class="card-header">🗺️ Tap an activity to see where to eat nearby</div>
   <div class="restaurant-section">
     <h3>🥾 Hikes</h3>
-    <div class="restaurant-item">Waimea Canyon Trail <span>West side · ~11mi · "Grand Canyon of the Pacific"</span></div>
-    <div class="restaurant-item">Sleeping Giant Trail <span>East side · ~4mi · panoramic ridge views</span></div>
-    <div class="restaurant-item">Okolehao Trail <span>Hanalei · 5mi · bay views · no permit</span></div>
-    <div class="restaurant-item">Ho'opi'i Falls <span>Kapaa · short jungle hike · swimming hole</span></div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Waimea Canyon Trail <span>West side · ~11mi · "Grand Canyon of the Pacific"</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Coconut Corner — Waimea</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Sleeping Giant Trail <span>East side · ~4mi · panoramic ridge views</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Sleeping Giant Grill</span>
+        <span class="eat-tag">Eat Healthy Cafe — Kapaa</span>
+        <span class="eat-tag">Rainbeau Jo's</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Okolehao Trail <span>Hanalei · 5mi · bay views · no permit</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Hanalei Bread Co</span>
+        <span class="eat-tag">Fresh Bite Kauai</span>
+        <span class="eat-tag">Tahiti Nui — dinner</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Ho'opi'i Falls <span>Kapaa · short jungle hike · swimming hole</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Eat Healthy Cafe — Kapaa</span>
+        <span class="eat-tag">Rainbeau Jo's</span>
+        <span class="eat-tag">Mariachi — Kapaa dinner</span>
+      </div>
+    </div>
   </div>
+
   <div class="restaurant-section">
     <h3>🏖️ Beaches</h3>
-    <div class="restaurant-item">Tunnels Beach <span>North Shore · best snorkeling</span></div>
-    <div class="restaurant-item">Hanalei Bay <span>North Shore · paddle boarding · calm water</span></div>
-    <div class="restaurant-item">Hideaways Beach <span>Princeville · quiet · short hike down</span></div>
-    <div class="restaurant-item">Poipu Beach <span>South Shore · sunny when north is rainy</span></div>
-    <div class="restaurant-item">Queen's Bath <span>Princeville · natural ocean pool · check conditions</span></div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Tunnels Beach <span>North Shore · best snorkeling</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Hanalei Bread Co</span>
+        <span class="eat-tag">Harvest Market — grab & go</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Hanalei Bay <span>North Shore · paddle boarding · calm water</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Hanalei Bread Co</span>
+        <span class="eat-tag">Fresh Bite Kauai</span>
+        <span class="eat-tag">Tahiti Nui — dinner</span>
+        <span class="eat-tag">Dolphin Restaurant — dinner</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Hideaways Beach <span>Princeville · quiet · short hike down</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">The Terrace — Princeville</span>
+        <span class="eat-tag">1 Hotel</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Poipu Beach <span>South Shore · sunny when north is rainy</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">The Beach House — South Shore dinner</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Queen's Bath <span>Princeville · natural ocean pool · check conditions</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">The Terrace — Princeville</span>
+        <span class="eat-tag">1 Hotel</span>
+      </div>
+    </div>
   </div>
+
   <div class="restaurant-section">
     <h3>🏄 Water Activities</h3>
-    <div class="restaurant-item">Surf — Kapaa <span>Beginner-friendly · rent boards</span></div>
-    <div class="restaurant-item">Paddle Board — Hanalei Bay <span>Flat calm bay · mountain views</span></div>
-    <div class="restaurant-item">Snorkeling — Tunnels Beach <span>Reef right off shore · sea turtles</span></div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Surf — Kapaa <span>Beginner-friendly · rent boards</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Eat Healthy Cafe — Kapaa</span>
+        <span class="eat-tag">Rainbeau Jo's</span>
+        <span class="eat-tag">Mariachi — Kapaa dinner</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Paddle Board — Hanalei Bay <span>Flat calm bay · mountain views</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Hanalei Bread Co</span>
+        <span class="eat-tag">Kauai Juice Co</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Snorkeling — Tunnels Beach <span>Reef right off shore · sea turtles</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Harvest Market — grab & go</span>
+      </div>
+    </div>
   </div>
+
   <div class="restaurant-section">
     <h3>🤸 Adventures</h3>
-    <div class="restaurant-item">Zip Lining <span>Jungle canopy · book ahead</span></div>
-    <div class="restaurant-item">Limahuli Garden & Preserve <span>Ha'ena · native plants · waterfalls</span></div>
-    <div class="restaurant-item">Hanalei Farmers Market <span>Saturday only · local food & crafts</span></div>
-    <div class="restaurant-item">Hanalei Town <span>Shopping · walking around · anytime</span></div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Zip Lining <span>Jungle canopy · book ahead</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Java Kai</span>
+        <span class="eat-tag">Kauai Juice Co</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Limahuli Garden & Preserve <span>Ha'ena · native plants · waterfalls</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Harvest Market</span>
+        <span class="eat-tag">Wake Up Delicious</span>
+        <span class="eat-tag">Cook at home — near Wainiha</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Hanalei Farmers Market <span>Saturday only · local food & crafts</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Food vendors at the market!</span>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Wishing Well Coffee</span>
+      </div>
+    </div>
+
+    <div class="activity" onclick="this.classList.toggle('open')">
+      <div class="activity-header">Hanalei Town <span>Shopping · walking around · anytime</span></div>
+      <div class="activity-eats">
+        <div class="eat-label">🍴 Eat nearby</div>
+        <span class="eat-tag">Nourish Hanalei</span>
+        <span class="eat-tag">Hanalei Bread Co</span>
+        <span class="eat-tag">Fresh Bite Kauai</span>
+        <span class="eat-tag">Tahiti Nui — dinner</span>
+        <span class="eat-tag">Dolphin Restaurant — dinner</span>
+      </div>
+    </div>
   </div>
   <div style="height:6px;"></div>
 </div>
