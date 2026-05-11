@@ -405,7 +405,7 @@
 <div class="alert">
   <strong>⚠️ Book before you fly</strong>
   🏄 <a href="https://www.hanaleisurf.com/board-rental-info" style="color:#5a3e00;">Hanalei Surf — reserve boards</a><br>
-  🤸 Zip lining — book in advance
+  🤸 <a href="https://koloazipline.com/" style="color:#5a3e00;">Koloa Zipline</a> — book in advance (~$159/person)
 </div>
 
 <!-- DAY 1 -->
@@ -613,8 +613,8 @@
     <div class="item">
       <div class="item-icon">🤸</div>
       <div class="item-text">
-        <h3>Zip Lining</h3>
-        <p>Jungle canopy zip line</p>
+        <h3>Zip Lining — Koloa Zipline</h3>
+        <p>8 lines including a half-mile zip over the jungle canopy. ~3.5hrs, ~$159/person</p>
         <span class="tag">Book ahead</span>
       </div>
     </div>
@@ -873,7 +873,7 @@
     <h3>🤸 Adventures</h3>
 
     <div class="activity" onclick="this.classList.toggle('open')">
-      <div class="activity-header">Zip Lining <span>Jungle canopy · book ahead</span></div>
+      <div class="activity-header">Koloa Zipline <a href="https://maps.google.com/?q=Koloa+Zipline+Kauai" class="map-link" onclick="event.stopPropagation()">📍</a> <span>8 lines · half-mile zip · ~$159/person · book ahead</span></div>
       <div class="activity-eats">
         <div class="eat-label">🍴 Eat nearby</div>
         <a class="eat-tag" href="https://maps.google.com/?q=Java+Kai+Kauai">Java Kai 📍</a>
@@ -947,47 +947,56 @@
     { lat: 22.0985, lng: -159.3770, name: "Ho'opi'i Falls", cat: 'hike' },
     // Beaches
     { lat: 22.2225, lng: -159.5700, name: 'Tunnels Beach', cat: 'beach' },
-    { lat: 22.2085, lng: -159.5010, name: 'Hanalei Bay', cat: 'beach' },
+    { lat: 22.2087, lng: -159.4920, name: 'Hanalei Bay', cat: 'beach' },
     { lat: 22.2230, lng: -159.4800, name: 'Hideaways Beach', cat: 'beach' },
-    { lat: 21.8770, lng: -159.4600, name: 'Poipu Beach', cat: 'beach' },
+    { lat: 21.8770, lng: -159.4530, name: 'Poipu Beach', cat: 'beach' },
     { lat: 22.2270, lng: -159.4770, name: "Queen's Bath", cat: 'beach' },
     // Adventures
     { lat: 22.2190, lng: -159.5780, name: 'Limahuli Garden', cat: 'activity' },
     { lat: 22.2050, lng: -159.4960, name: 'Hanalei Farmers Market', cat: 'activity' },
-    // Restaurants — Hanalei area
-    { lat: 22.2037, lng: -159.4930, name: 'Nourish Hanalei', cat: 'food' },
-    { lat: 22.2040, lng: -159.4950, name: 'Hanalei Bread Company', cat: 'food' },
-    { lat: 22.2035, lng: -159.4945, name: 'Fresh Bite Kauai', cat: 'food' },
-    { lat: 22.2042, lng: -159.4925, name: 'Tahiti Nui', cat: 'food' },
-    { lat: 22.2038, lng: -159.4955, name: 'Dolphin Restaurant', cat: 'food' },
-    { lat: 22.2045, lng: -159.4935, name: 'Harvest Market', cat: 'food' },
-    { lat: 22.2030, lng: -159.4940, name: 'Kauai Juice Co', cat: 'food' },
-    // Restaurants — Kapaa area
-    { lat: 22.0925, lng: -159.3430, name: 'Eat Healthy Cafe', cat: 'food' },
-    { lat: 22.0910, lng: -159.3420, name: "Rainbeau Jo's", cat: 'food' },
-    { lat: 22.0920, lng: -159.3440, name: 'Mariachi', cat: 'food' },
-    { lat: 22.0870, lng: -159.3510, name: 'Sleeping Giant Grill', cat: 'food' },
-    // Restaurants — other
-    { lat: 22.0680, lng: -159.6690, name: 'Coconut Corner', cat: 'food' },
-    { lat: 22.2200, lng: -159.4700, name: 'The Terrace', cat: 'food' },
-    { lat: 22.2210, lng: -159.4710, name: '1 Hotel', cat: 'food' },
-    { lat: 21.8720, lng: -159.4610, name: 'The Beach House', cat: 'food' },
-    { lat: 22.2120, lng: -159.4000, name: 'The Bistro (Kilauea)', cat: 'food' },
-    { lat: 22.2033, lng: -159.4920, name: 'Wishing Well Coffee', cat: 'food' },
-    { lat: 22.2048, lng: -159.4960, name: 'Wake Up Delicious', cat: 'food' },
-    { lat: 22.0930, lng: -159.3450, name: 'Java Kai', cat: 'food' },
-    { lat: 22.2015, lng: -159.4935, name: 'Grandma Dining', cat: 'food' },
+    { lat: 21.9060, lng: -159.4250, name: 'Koloa Zipline', cat: 'activity' },
+    // Restaurants — Hanalei / North Shore
+    { lat: 22.2176, lng: -159.4789, name: 'Nourish Hanalei (Princeville)', cat: 'food' },
+    { lat: 22.2043, lng: -159.4962, name: 'Hanalei Bread Company', cat: 'food' },
+    { lat: 22.2040, lng: -159.4975, name: 'Fresh Bite Kauai', cat: 'food' },
+    { lat: 22.2044, lng: -159.4940, name: 'Tahiti Nui', cat: 'food' },
+    { lat: 22.2055, lng: -159.5000, name: 'Dolphin Restaurant', cat: 'food' },
+    { lat: 22.2046, lng: -159.4955, name: 'Harvest Market', cat: 'food' },
+    { lat: 22.2042, lng: -159.4948, name: 'Wake Up Delicious', cat: 'food' },
+    { lat: 22.2038, lng: -159.4985, name: 'Wishing Well Shave Ice', cat: 'food' },
+    { lat: 22.2048, lng: -159.4930, name: 'The Terrace Hanalei', cat: 'food' },
+    // Restaurants — Kilauea
+    { lat: 22.2120, lng: -159.4050, name: 'The Bistro (Kilauea)', cat: 'food' },
+    { lat: 22.2100, lng: -159.3980, name: 'Kauai Juice Co (Kilauea)', cat: 'food' },
+    // Restaurants — Kapaa / East
+    { lat: 22.0780, lng: -159.3340, name: 'Eat Healthy Cafe (Kapaa)', cat: 'food' },
+    { lat: 22.0785, lng: -159.3350, name: "Mariachi's (Kapaa)", cat: 'food' },
+    { lat: 22.0815, lng: -159.3380, name: 'Sleeping Giant Grill (Kapaa)', cat: 'food' },
+    { lat: 22.0783, lng: -159.3345, name: 'Java Kai (Kapaa)', cat: 'food' },
+    // Restaurants — Lihue
+    { lat: 21.9750, lng: -159.3670, name: "Rainbeau Jo's (Lihue)", cat: 'food' },
+    // Restaurants — Princeville
+    { lat: 22.2218, lng: -159.4710, name: '1 Hotel Hanalei Bay', cat: 'food' },
+    // Restaurants — South / West
+    { lat: 21.8720, lng: -159.4610, name: 'The Beach House (Poipu)', cat: 'food' },
+    { lat: 22.0680, lng: -159.6690, name: 'Coconut Corner (Waimea)', cat: 'food' },
+    { lat: 21.9080, lng: -159.5870, name: "Japanese Grandma's (Hanapepe)", cat: 'food' },
   ];
 
-  var colors = { hike: '#8B4513', beach: '#0077BE', activity: '#E67E22', food: '#1C6B44' };
-  var labels = { hike: '🥾', beach: '🏖️', activity: '🤸', food: '🍴' };
+  var icons = {
+    hike: '<div style="font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.4));">🥾</div>',
+    beach: '<div style="font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.4));">🏖️</div>',
+    activity: '<div style="font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.4));">🤸</div>',
+    food: '<div style="width:12px;height:12px;background:#1C6B44;border:2px solid white;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></div>'
+  };
 
   spots.forEach(function(s) {
+    var isFood = s.cat === 'food';
     var icon = L.divIcon({
       className: '',
-      html: '<div style="font-size:18px;text-shadow:0 1px 3px rgba(0,0,0,0.3);">' + labels[s.cat] + '</div>',
-      iconSize: [24, 24],
-      iconAnchor: [12, 12]
+      html: icons[s.cat],
+      iconSize: isFood ? [12, 12] : [24, 24],
+      iconAnchor: isFood ? [6, 6] : [12, 12]
     });
     L.marker([s.lat, s.lng], { icon: icon })
       .addTo(map)
