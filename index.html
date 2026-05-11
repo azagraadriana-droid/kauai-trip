@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kauai 🌿</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f7f3ee;
+    color: #2a1a0e;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+
+  /* HEADER */
+  .header {
+    background: #1C6B44;
+    color: #f5ede0;
+    text-align: center;
+    padding: 36px 20px 28px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 13px;
+    letter-spacing: 3px;
+    opacity: 0.8;
+    text-transform: uppercase;
+  }
+  .header .dates {
+    margin-top: 12px;
+    font-size: 15px;
+    opacity: 0.9;
+    letter-spacing: 1px;
+  }
+
+  /* STRIPE ACCENT */
+  .stripe {
+    height: 8px;
+    background: repeating-linear-gradient(
+      90deg,
+      #1C6B44 0px, #1C6B44 14px,
+      #f5ede0 14px, #f5ede0 28px
+    );
+  }
+
+  /* ALERT BANNER */
+  .alert {
+    background: #fdf3d0;
+    border-left: 4px solid #d4a017;
+    margin: 16px 16px 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5a3e00;
+  }
+  .alert strong { display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* DAY CARD */
+  .day {
+    margin: 16px 16px 0;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-header:active { opacity: 0.85; }
+
+  .day-dot {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #1C6B44;
+    color: #f5ede0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 14px;
+  }
+  .day-dot span:first-child {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .day-dot span:last-child {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .day-title { flex: 1; }
+  .day-title h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2a1a0e;
+  }
+  .day-title p {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .chevron {
+    font-size: 18px;
+    color: #ccc;
+    transition: transform 0.25s;
+  }
+  .day.open .chevron { transform: rotate(180deg); }
+
+  /* DAY BODY */
+  .day-body {
+    display: none;
+    padding: 0 18px 18px;
+    border-top: 1px solid #f0ebe5;
+  }
+  .day.open .day-body { display: block; }
+
+  /* ACTIVITY ITEM */
+  .item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f0ea;
+  }
+  .item:last-child { border-bottom: none; }
+
+  .item-icon {
+    font-size: 20px;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .item-text h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2a1a0e;
+    margin-bottom: 2px;
+  }
+  .item-text p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+  }
+  .item-text .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: #e8f5ee;
+    color: #1C6B44;
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1C6B44;
+    font-weight: 700;
+    padding: 14px 0 6px;
+  }
+
+  /* RESTAURANTS CARD */
+  .restaurants-card {
+    margin: 16px 16px 0;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .restaurants-card .card-header {
+    background: #1C6B44;
+    color: #f5ede0;
+    padding: 14px 18px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .restaurant-section {
+    padding: 0 18px;
+  }
+  .restaurant-section h3 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1C6B44;
+    font-weight: 700;
+    padding: 14px 0 6px;
+    border-bottom: 1px solid #f5f0ea;
+  }
+  .restaurant-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f9f5f0;
+    font-size: 14px;
+  }
+  .restaurant-item:last-child { border-bottom: none; }
+  .restaurant-item span { color: #aaa; font-size: 12px; }
+
+  /* SUMMARY CARDS */
+  .summary-card {
+    margin: 16px 16px 0;
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .summary-card h2 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1C6B44;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .summary-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    align-items: flex-start;
+  }
+  .summary-row .badge {
+    background: #e8f5ee;
+    color: #1C6B44;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+  }
+  .summary-row p { color: #555; line-height: 1.4; }
+
+  /* LINKS CARD */
+  .links-card {
+    margin: 16px 16px 0;
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .links-card h2 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1C6B44;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .links-card a {
+    display: block;
+    color: #1C6B44;
+    font-size: 13px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f5f0ea;
+    text-decoration: none;
+  }
+  .links-card a:last-child { border-bottom: none; }
+  .links-card a:hover { opacity: 0.7; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 28px 20px 0;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>KAUAI 🌿</h1>
+  <p>The Garden Isle</p>
+  <div class="dates">Wednesday May 20 — Sunday May 24</div>
+  <div class="dates" style="font-size:13px; opacity:0.7; margin-top:4px;">Staying in Wainiha</div>
+</div>
+<div class="stripe"></div>
+
+<!-- BOOK IN ADVANCE ALERT -->
+<div class="alert">
+  <strong>⚠️ Book before you fly</strong>
+  🏄 Kapaa surf rental — reserve boards for the day<br>
+  🤸 Zip lining — book in advance
+</div>
+
+<!-- DAY 1 -->
+<div class="day open">
+  <div class="day-header" onclick="toggle(this)">
+    <div class="day-dot"><span>WED</span><span>20</span></div>
+    <div class="day-title">
+      <h2>Arrive & Settle In</h2>
+      <p>Easy evening · Wainiha</p>
+    </div>
+    <div class="chevron">⌄</div>
+  </div>
+  <div class="day-body">
+    <div class="item">
+      <div class="item-icon">✈️</div>
+      <div class="item-text">
+        <h3>Arrive ~3pm</h3>
+        <p>Pick up rental car at Lihue airport and drive up to Wainiha (~1hr)</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🏡</div>
+      <div class="item-text">
+        <h3>Check in & unwind</h3>
+        <p>Drop your bags, explore the area</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🌅</div>
+      <div class="item-text">
+        <h3>Sunset walk</h3>
+        <p>Stroll down to the beach near your place</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🍽️</div>
+      <div class="item-text">
+        <h3>Dinner: The Bistro — 6:30pm</h3>
+        <p>Kilauea — nice drive after dropping bags at hotel</p>
+        <span class="tag">Booked ✓</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day">
+  <div class="day-header" onclick="toggle(this)">
+    <div class="day-dot"><span>THU</span><span>21</span></div>
+    <div class="day-title">
+      <h2>Beach & Water Day</h2>
+      <p>Paddle board · Snorkel · Tunnels Beach</p>
+    </div>
+    <div class="chevron">⌄</div>
+  </div>
+  <div class="day-body">
+    <div class="item">
+      <div class="item-icon">☕</div>
+      <div class="item-text">
+        <h3>Wishing Well or Hanalei Bread Co</h3>
+        <p>Morning coffee in Hanalei</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🏄</div>
+      <div class="item-text">
+        <h3>Paddle Boarding — Hanalei Bay</h3>
+        <p>Flat calm bay with mountain views — rent boards from the beach</p>
+        <span class="tag">Water day</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🥗</div>
+      <div class="item-text">
+        <h3>Lunch: Nourish Hanalei</h3>
+        <p>Healthy lunch in Hanalei</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🤿</div>
+      <div class="item-text">
+        <h3>Tunnels Beach (Makua Beach)</h3>
+        <p>Reef right off shore, sea turtles, tropical fish. Bring your own gear or rent in town</p>
+        <span class="tag">Best snorkeling on island</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🌊</div>
+      <div class="item-text">
+        <h3>Ho'opi'i Falls</h3>
+        <p>Jungle hike to a swimming hole — jump in if the water's calm. Wear sneakers</p>
+        <span class="tag">Hidden gem</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🍽️</div>
+      <div class="item-text">
+        <h3>Dinner: Tahiti Nui</h3>
+        <p>Live music, drinks, casual Hanalei vibes</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day">
+  <div class="day-header" onclick="toggle(this)">
+    <div class="day-dot"><span>FRI</span><span>22</span></div>
+    <div class="day-title">
+      <h2>Na Pali Adventure</h2>
+      <p>Big hike day · Kalalau</p>
+    </div>
+    <div class="chevron">⌄</div>
+  </div>
+  <div class="day-body">
+    <div class="item">
+      <div class="item-icon">☕</div>
+      <div class="item-text">
+        <h3>Nourish, Wishing Well or Hanalei Bread Co</h3>
+        <p>Whichever you liked best from Thursday</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🌊</div>
+      <div class="item-text">
+        <h3>Queen's Bath — morning dip</h3>
+        <p>Natural ocean pool in Princeville. Go early to avoid crowds, wear sneakers for the trail down</p>
+        <span class="tag">Caution · check conditions</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🛒</div>
+      <div class="item-text">
+        <h3>Harvest Market — grab hike food</h3>
+        <p>Pick up lunch and snacks before hitting the trail</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🥾</div>
+      <div class="item-text">
+        <h3>Okolehao Trail</h3>
+        <p>5 miles round trip ridge hike — panoramic views of Hanalei Bay and the mountains. Starts in Hanalei</p>
+        <span class="tag">Free · No permit</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🌺</div>
+      <div class="item-text">
+        <h3>Limahuli Garden & Preserve</h3>
+        <p>Botanical garden near your place in Ha'ena — native plants, waterfalls, ocean views. Chill hour after the hike</p>
+        <span class="tag">Near Wainiha</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🛍️</div>
+      <div class="item-text">
+        <h3>Hanalei Town</h3>
+        <p>Afternoon shopping and walking around</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🍽️</div>
+      <div class="item-text">
+        <h3>Cook at home</h3>
+        <p>Easy night in after the hike</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day">
+  <div class="day-header" onclick="toggle(this)">
+    <div class="day-dot"><span>SAT</span><span>23</span></div>
+    <div class="day-title">
+      <h2>Surf, Market & Zip Line</h2>
+      <p>Sunrise surf · Farmers market · Zip line</p>
+    </div>
+    <div class="chevron">⌄</div>
+  </div>
+  <div class="day-body">
+    <div class="item">
+      <div class="item-icon">🏄</div>
+      <div class="item-text">
+        <h3>Sunrise Surf — Kapaa</h3>
+        <p>Up early on NYC time — rent a board and catch the morning waves</p>
+        <span class="tag">Sunrise session</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">☕</div>
+      <div class="item-text">
+        <h3>Rainbeau Jo's</h3>
+        <p>Breakfast after surf</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🛒</div>
+      <div class="item-text">
+        <h3>Hanalei Farmers Market</h3>
+        <p>Saturday morning — local produce, food vendors, crafts</p>
+        <span class="tag">Saturday only</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🤸</div>
+      <div class="item-text">
+        <h3>Zip Lining</h3>
+        <p>Jungle canopy zip line</p>
+        <span class="tag">Book ahead</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">☕</div>
+      <div class="item-text">
+        <h3>Kauai Juice Co</h3>
+        <p>Post-zip line kombucha, coffee, or lunch</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-icon">🍽️</div>
+      <div class="item-text">
+        <h3>Dinner: The Terrace — 6:30pm</h3>
+        <p>Princeville</p>
+        <span class="tag">Booked ✓</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day">
+  <div class="day-header" onclick="toggle(this)">
+    <div class="day-dot"><span>SUN</span><span>24</span></div>
+    <div class="day-title">
+      <h2>Early Departure</h2>
+      <p>9am flight · head to airport</p>
+    </div>
+    <div class="chevron">⌄</div>
+  </div>
+  <div class="day-body">
+    <div class="item">
+      <div class="item-icon">☕</div>
+      <div class="item-text">
+        <h3>Early departure — 9am flight</h3>
+        <p>Return rental car at Lihue and fly out. Aloha, Kauai 🌿</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESTAURANTS -->
+<div class="restaurants-card">
+  <div class="card-header">🍴 All Restaurants</div>
+  <div class="restaurant-section">
+    <h3>Breakfast / Lunch / Coffee</h3>
+    <div class="restaurant-item">Nourish Hanalei <span>Hanalei</span></div>
+    <div class="restaurant-item">Hanalei Bread Company <span>Hanalei</span></div>
+    <div class="restaurant-item">Wishing Well Coffee <span>—</span></div>
+    <div class="restaurant-item">Eat Healthy Cafe <span>Kapaa</span></div>
+    <div class="restaurant-item">Coconut Corner <span>Waimea</span></div>
+    <div class="restaurant-item">Java Kai <span>after zip lining</span></div>
+    <div class="restaurant-item">Rainbeau Jo's <span>—</span></div>
+    <div class="restaurant-item">Fresh Bite Kauai <span>Hanalei</span></div>
+    <div class="restaurant-item">Harvest Market <span>North Shore — grab food before hikes</span></div>
+    <div class="restaurant-item">Wake Up Delicious <span>North Shore</span></div>
+    <div class="restaurant-item">Kauai Juice Co <span>North Shore</span></div>
+    <div class="restaurant-item">Sleeping Giant Grill <span>—</span></div>
+  </div>
+  <div class="restaurant-section">
+    <h3>Dinner</h3>
+    <div class="restaurant-item">Grandma Dining <span>—</span></div>
+    <div class="restaurant-item">1 Hotel <span>—</span></div>
+    <div class="restaurant-item">Dolphin Restaurant <span>Hanalei</span></div>
+    <div class="restaurant-item">Mariachi <span>Kapaa</span></div>
+    <div class="restaurant-item">The Beach House <span>South Shore — reserve ahead</span></div>
+    <div class="restaurant-item">Tahiti Nui <span>Hanalei</span></div>
+  </div>
+  <div style="height:6px;"></div>
+</div>
+
+<!-- SURF SUMMARY -->
+<div class="summary-card">
+  <h2>🏄 Surf</h2>
+  <div class="summary-row">
+    <span class="badge">SAT</span>
+    <p><strong>Kapaa</strong> — sunset session</p>
+  </div>
+</div>
+
+<!-- HIKE SUMMARY -->
+<div class="summary-card" style="margin-top:12px;">
+  <h2>🥾 Hikes</h2>
+  <div class="summary-row">
+    <span class="badge">FRI</span>
+    <p><strong>Okolehao Trail</strong> — Hanalei, 5mi round trip, free, panoramic bay views</p>
+  </div>
+  <div class="summary-row">
+    <span class="badge">ALT</span>
+    <p><strong>Waimea Canyon Trail</strong> — West side, ~11mi, "Grand Canyon of the Pacific" · red rock canyon views</p>
+  </div>
+  <div class="summary-row">
+    <span class="badge">ALT</span>
+    <p><strong>Sleeping Giant Trail</strong> — East side (Nounou Mountain), ~4mi round trip, panoramic ridge views</p>
+  </div>
+  <div class="summary-row" style="margin-bottom:0;">
+    <span class="badge" style="background:#eee;color:#999;">+</span>
+    <p style="color:#aaa;font-size:12px;">More hikes: <a href="https://kauaiva.com/kauai-hiking-guide/" style="color:#1C6B44;">Kauai Hiking Guide</a></p>
+  </div>
+</div>
+
+<!-- BEACH SUMMARY -->
+<div class="summary-card" style="margin-top:12px;">
+  <h2>🏖️ Beaches</h2>
+  <div class="summary-row">
+    <span class="badge">THU</span>
+    <p><strong>Hanalei Beach</strong> — paddle boarding</p>
+  </div>
+  <div class="summary-row">
+    <span class="badge">THU</span>
+    <p><strong>Tunnels Beach</strong> — best snorkeling on the island</p>
+  </div>
+  <div class="summary-row">
+    <span class="badge">FRI</span>
+    <p><strong>Okolehao Trail</strong> — ridge hike, Hanalei Bay views</p>
+  </div>
+  <div class="summary-row">
+    <span class="badge">ANY</span>
+    <p><strong>Hideaways Beach</strong> — quiet beach near Princeville, short hike down</p>
+  </div>
+</div>
+
+<!-- USEFUL LINKS -->
+<div class="links-card">
+  <h2>🔗 Useful Links</h2>
+  <a href="https://kauaiva.com/kauai-hiking-guide/">Kauai Hiking Guide</a>
+  <a href="https://kauaiva.com/kauai-farmers-markets/">Kauai Farmers Markets + Retail Outlets</a>
+  <a href="https://finduslost.com/the-complete-kauai-travel-guide/">Find Us Lost — Complete Kauai Guide</a>
+</div>
+
+<div class="footer">KAUAI · MAY 2026 🌿</div>
+
+<script>
+  function toggle(header) {
+    const day = header.parentElement;
+    day.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
