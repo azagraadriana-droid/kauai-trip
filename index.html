@@ -933,7 +933,8 @@
   }
 
   // Map
-  var map = L.map('kauai-map', { scrollWheelZoom: false }).setView([22.05, -159.45], 11);
+  var map = L.map('kauai-map', { scrollWheelZoom: false, tap: true }).setView([22.05, -159.45], 11);
+  setTimeout(function(){ map.invalidateSize(); }, 200);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
   }).addTo(map);
